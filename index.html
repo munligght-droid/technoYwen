@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechnoYwen - Комп'ютерна периферія</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Верхня навігація -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1> TechnoYwen</h1>
+                <p>Магазин комп'ютерної периферії</p>
+            </div>
+            <nav class="main-nav">
+                <a href="#" class="nav-link">Головна</a>
+                <a href="#" id="order-nav-btn" class="nav-link">Оформити замовлення</a>
+                <a href="#contact" class="nav-link">Контакти</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+    <!-- Мобільне меню -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close">✕</button>
+        <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-link">Головна</a>
+            <a href="#" id="order-mobile-btn" class="mobile-nav-link">Оформити замовлення</a>
+            <a href="#contact" class="mobile-nav-link">Контакти</a>
+        </nav>
+    </div>
+    <!-- Основний контейнер -->
+    <div class="container">
+        <!-- Банер -->
+        <section class="promo-section">
+            <img id="promo-banner" src="https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=1200&q=80" alt="Комп'ютерна периферія">
+            <div class="promo-overlay">
+                <h2 id="main-title">Комп'ютерна периферія</h2>
+                <p>Клавіатури, миші та аксесуари від провідних виробників</p>
+            </div>
+        </section>
+        <!-- Інформаційний блок -->
+        <div id="extra-info"></div>
+        <!-- Форма пошуку -->
+        <section class="search-section">
+            <div class="search-container">
+                <h2>🔍 Пошук товару</h2>
+                <form id="searchForm">
+                    <input type="text" id="searchInput" placeholder="Введіть назву товару..." autocomplete="off">
+                    <button type="submit">Знайти</button>
+                </form>
+                <p id="search-error" class="error-message"></p>
+                <p id="search-result" class="search-result"></p>
+            </div>
+        </section>
+        <!-- Кнопки управління -->
+        <section class="controls">
+            <button id="theme-btn"> Темна тема</button>
+            <button id="calc-btn"> Порахувати вартість</button>
+            <button id="admin-btn"> Адмін-доступ</button>
+        </section>
+        <!-- Вкладки категорій -->
+        <section class="tabs-section">
+            <h2 class="section-title">Наш асортимент</h2>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="all">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">Всі товари</span>
+                    <span class="tab-count" id="count-all">0</span>
+                </button>
+                <button class="tab-btn" data-tab="mice">
+                    <span class="tab-icon"></span>
+                    <span class="tab-text">Миші</span>
+                    <span class="tab-count" id="count-mice">0</span>
+                </button>
+                <button class="tab-btn" data-tab="keyboards">
+                    <span class="tab-icon">⌨</span>
+                    <span class="tab-text">Клавіатури</span>
+                    <span class="tab-count" id="count-keyboards">0</span>
+                </button>
+            </div>
+        </section>
+        <!-- Список товарів -->
+        <section class="products-section">
+            <div class="filter-bar">
+                <span class="filter-label">Фільтр:</span>
+                <button class="filter-btn active" data-filter="all">Всі</button>
+                <button class="filter-btn" data-filter="inStock">В наявності</button>
+                <button class="filter-btn" data-filter="discount">Зі знижкою</button>
+            </div>
+            <div id="product-list" class="product-grid"></div>
+        </section>
+        <!-- Статус -->
+        <div id="status-message" class="status-message"></div>
+    </div>
+    <!-- Модальне вікно замовлення -->
+    <div class="modal" id="order-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">✕</button>
+            
+            <h2> Оформити замовлення</h2>
+            <p class="order-description">Заповніть форму для швидкого оформлення замовлення</p>
+            
+            <form id="orderForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Повне ім'я *</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Іван Петренко">
+                        <span class="error-text" id="fullName-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Електронна пошта *</label>
+                        <input type="email" id="email" name="email" placeholder="example@gmail.com">
+                        <span class="error-text" id="email-error"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+380XXXXXXXXX">
+                        <span class="error-text" id="phone-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Адреса доставки *</label>
+                        <input type="text" id="address" name="address" placeholder="Місто, вулиця, будинок">
+                        <span class="error-text" id="address-error"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="product">Оберіть товар *</label>
+                    <select id="product" name="product">
+                        <option value="">-- Оберіть товар зі списку --</option>
+                    </select>
+                    <span class="error-text" id="product-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль для особистого кабінету *</label>
+                    <input type="password" id="password" name="password" placeholder="Мінімум 8 символів">
+                    <span class="error-text" id="password-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Коментар до замовлення</label>
+                    <textarea id="comment" name="comment" rows="3" placeholder="Додаткові побажання (необов'язково)"></textarea>
+                    <span class="error-text" id="comment-error"></span>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="terms" name="terms">
+                        Я погоджуюсь з умовами обробки персональних даних *
+                    </label>
+                    <span class="error-text" id="terms-error"></span>
+                </div>
+                <button type="submit" class="submit-btn">Оформити замовлення</button>
+            </form>
+            <div id="success-message" class="success-message"></div>
+        </div>
+    </div>
+    <!-- Модальне вікно деталей товару -->
+    <div class="modal" id="product-modal">
+        <div class="modal-overlay" id="product-modal-overlay"></div>
+        <div class="modal-content product-details-modal">
+            <button class="modal-close" id="product-modal-close">✕</button>
+            <div id="product-details-content"></div>
+        </div>
+    </div>
+    <!-- Футер -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <p>&copy; 2024 TechnoYwen. Магазин комп'ютерної периферії</p>
+            <p> +380 (50) 123-45-67 |  info@technoywen.ua</p>
+            <p>Офіційний представник Logitech, Razer, SteelSeries, Corsair, Keychron в Україні</p>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>
